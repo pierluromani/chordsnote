@@ -1,0 +1,197 @@
+rules_version = '2';
+
+// Chi può leggere e scrivere cosa. La configurazione web di Firebase è
+// pubblica per definizione: la sicurezza vera sta qui, non nel nasconderla.
+//
+// Tre rami:
+//   /users/{uid}   il ramo privato di ciascuno — nessun altro entra.
+//   /bands/{id}    una band condivisa: il fondatore governa la formazione,
+//                  gli editor scrivono repertorio e scalette, gli altri leggono.
+//   /invites/{id}  un invito, indirizzato a un'email e non a un account, così
+//                  può aspettare chi non si è ancora registrato.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    /** L'email di chi scrive, minuscola. Stringa vuota se non ne ha una. */
+    function myEmail() {
+      return signedIn() && request.auth.token.email != null
+        ? request.auth.token.email.lower()
+        : '';
+    }
+
+    function bandData(bandId) {
+      return get(/databases/$(database)/documents/bands/$(bandId)).data;
+    }
+
+    /* --------------------------------------------------------- Ramo privato */
+
+    match /users/{uid}/{document=**} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+    }
+
+    /* -------------------------------------------------------------- Inviti */
+
+    // `ownerUid` è copiato sull'invito apposta: senza, leggere la lista degli
+    // inviti di una band costerebbe un get() per documento e sfonderebbe il
+    // limite di accessi che una query ha a disposizione.
+    // Due `allow read` distinte anziché una sola con un `||`: per una query
+    // Firestore non guarda i documenti, dimostra la regola dai vincoli della
+    // query, e un'alternativa che la query non vincola fa cadere tutto. Così
+    // ciascuna delle due letture legittime — «gli inviti indirizzati a me» e
+    // «gli inviti della mia band» — si dimostra da sola.
+    match /invites/{inviteId} {
+      allow read: if signedIn() && resource.data.email == myEmail();
+      allow read: if signedIn() && request.auth.uid == resource.data.ownerUid;
+
+      // Invita solo il fondatore, e solo con l'id derivato da band + email:
+      // invitare due volte la stessa persona riscrive lo stesso invito.
+      allow create: if signedIn()
+        && request.auth.uid == request.resource.data.ownerUid
+        && request.auth.uid == bandData(request.resource.data.bandId).ownerUid
+        && inviteId == request.resource.data.bandId + '__' + request.resource.data.email
+        && request.resource.data.email == request.resource.data.email.lower()
+        && request.resource.data.role in ['editor', 'viewer'];
+
+      // Il fondatore revoca, l'invitato accetta o rifiuta: in tutti i casi
+      // l'invito sparisce. Qui il documento c'è davvero, quindi un `||` basta.
+      allow delete: if signedIn() && (
+        resource.data.email == myEmail() ||
+        request.auth.uid == resource.data.ownerUid
+      );
+    }
+
+    /* ---------------------------------------------------- Brani consegnati */
+
+    // Un brano mandato a qualcuno. Vale la stessa logica degli inviti: due
+    // `allow read` separate, perché una query dimostra la regola dai propri
+    // vincoli e un'alternativa non vincolata farebbe cadere tutto.
+    //
+    // Il brano viaggia dentro il documento: il destinatario non può leggere il
+    // ramo privato di chi invia, quindi ciò che accetta deve essere qui.
+    // Nessun `update`: una consegna non si modifica, si revoca e si rifà.
+    match /shares/{shareId} {
+      allow read: if signedIn() && resource.data.email == myEmail();
+      allow read: if signedIn() && request.auth.uid == resource.data.fromUid;
+
+      allow create: if signedIn()
+        && request.auth.uid == request.resource.data.fromUid
+        && shareId == request.resource.data.songId + '__' + request.resource.data.email
+        && request.resource.data.email == request.resource.data.email.lower()
+        && request.resource.data.email != myEmail();
+
+      // Chi invia revoca, chi riceve accetta o rifiuta: in ogni caso sparisce.
+      allow delete: if signedIn() && (
+        resource.data.email == myEmail() ||
+        request.auth.uid == resource.data.fromUid
+      );
+    }
+
+    /* --------------------------------------------------------------- Band */
+
+    match /bands/{bandId} {
+      function existing() { return resource.data; }
+      function incoming() { return request.resource.data; }
+
+      function isOwner() {
+        return signedIn() && request.auth.uid == existing().ownerUid;
+      }
+      function isMember() {
+        return signedIn() && request.auth.uid in existing().memberUids;
+      }
+
+      function invitePath() {
+        return /databases/$(database)/documents/invites/$(bandId + '__' + myEmail());
+      }
+      function hasInvite() {
+        return myEmail() != '' && exists(invitePath());
+      }
+      function invitedAsEditor() {
+        return get(invitePath()).data.role == 'editor';
+      }
+
+      function me() { return [request.auth.uid].toSet(); }
+
+      /**
+       * Entrare con un invito. L'unica cosa che può cambiare sono io: chi
+       * accetta si aggiunge alla formazione e, se l'invito lo diceva, agli
+       * editor — non tocca il fondatore né gli altri.
+       */
+      function joining() {
+        return hasInvite()
+          && incoming().ownerUid == existing().ownerUid
+          && incoming().memberUids.toSet() == existing().memberUids.toSet().union(me())
+          && incoming().editorUids.toSet() == (
+               invitedAsEditor()
+                 ? existing().editorUids.toSet().union(me())
+                 : existing().editorUids.toSet()
+             )
+          && incoming().members.size() == existing().members.size() + 1;
+      }
+
+      /** Uscire. Il fondatore non può: la band resterebbe senza padrone. */
+      function leaving() {
+        return isMember()
+          && request.auth.uid != existing().ownerUid
+          && incoming().ownerUid == existing().ownerUid
+          && incoming().memberUids.toSet() == existing().memberUids.toSet().difference(me())
+          && !(request.auth.uid in incoming().editorUids)
+          && incoming().editorUids.toSet().difference(me())
+             == existing().editorUids.toSet().difference(me());
+      }
+
+      // Un invitato deve poter leggere la band per accettare l'invito.
+      allow get: if isMember() || hasInvite();
+      // La query è `memberUids array-contains uid`: ogni documento che torna
+      // soddisfa già questa regola.
+      allow list: if signedIn() && request.auth.uid in resource.data.memberUids;
+
+      allow create: if signedIn()
+        && request.auth.uid == incoming().ownerUid
+        && incoming().memberUids.hasOnly([request.auth.uid])
+        && incoming().editorUids.hasOnly([request.auth.uid]);
+
+      allow update: if isOwner() || joining() || leaving();
+      allow delete: if isOwner();
+
+      /* Repertorio e scalette condivisi: leggono tutti, scrivono gli editor
+         (il fondatore è dentro `editorUids`, così basta un controllo solo). */
+
+      match /songs/{songId} {
+        allow read: if signedIn() && request.auth.uid in bandData(bandId).memberUids;
+        allow write: if signedIn() && request.auth.uid in bandData(bandId).editorUids;
+      }
+
+      match /setlists/{setlistId} {
+        allow read: if signedIn() && request.auth.uid in bandData(bandId).memberUids;
+        allow write: if signedIn() && request.auth.uid in bandData(bandId).editorUids;
+      }
+
+      // Il calendario: prove e concerti. Legge chi è nella band, scrive chi
+      // può già scrivere il repertorio — nessun permesso nuovo da imparare.
+      match /events/{eventId} {
+        allow read: if signedIn() && request.auth.uid in bandData(bandId).memberUids;
+        allow write: if signedIn() && request.auth.uid in bandData(bandId).editorUids;
+      }
+
+      // Parlare è di tutti, anche di chi il repertorio può solo leggerlo.
+      // Un messaggio non si corregge: si cancella e si riscrive.
+      match /messages/{messageId} {
+        allow read: if signedIn() && request.auth.uid in bandData(bandId).memberUids;
+        allow create: if signedIn()
+          && request.auth.uid in bandData(bandId).memberUids
+          && request.auth.uid == request.resource.data.uid
+          && request.resource.data.text is string
+          && request.resource.data.text.size() > 0
+          && request.resource.data.text.size() <= 2000;
+        allow delete: if signedIn() && (
+          request.auth.uid == resource.data.uid ||
+          request.auth.uid == bandData(bandId).ownerUid
+        );
+      }
+    }
+  }
+}

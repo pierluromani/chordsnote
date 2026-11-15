@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<meta name="design_doc_mode" content="canvas">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#EDE9E6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:#D93A2B;text-decoration:none}
+a:hover{color:#B22C1F}
+::-webkit-scrollbar{width:0;height:0}
+</style>
+</helmet>
+
+<section style="padding:88px 72px 110px;display:flex;flex-direction:column;gap:52px;font-family:'Hanken Grotesk',sans-serif">
+
+  <header style="display:flex;flex-direction:column;gap:12px;max-width:900px">
+    <span style="font:600 12px 'Hanken Grotesk';letter-spacing:.22em;text-transform:uppercase;color:#D93A2B">Direzione 2a · Palco</span>
+    <h1 style="margin:0;font:800 44px/1.05 'Sora',sans-serif;color:#1A1614;letter-spacing:-.025em">ChordsNote</h1>
+    <p style="margin:0;font:400 17px/1.6 'Hanken Grotesk';color:#6B5F59;max-width:660px">Cinque schermate principali: Home, lista canzoni di un catalogo, viewer, editor e scalette. Tema chiaro ad alto contrasto per il palco, testo grande, cromatura minima, rosso come unico accento.</p>
+  </header>
+
+  <div style="display:flex;gap:44px;flex-wrap:wrap;align-items:flex-start">
+
+    <!-- ═══════════════ 01 HOME ═══════════════ -->
+    <div data-screen-label="01 Home" style="display:flex;flex-direction:column;gap:14px;align-items:center">
+      <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402px,874px">
+        <div style="height:100%;display:flex;flex-direction:column;overflow:hidden;background:#FAF8F6;font-family:'Sora',sans-serif">
+          <div style="padding:58px 22px 10px;flex-shrink:0">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="display:flex;align-items:center;gap:9px"><div style="width:26px;height:26px;border-radius:8px;background:#D93A2B;display:flex;align-items:center;justify-content:center;font:800 14px 'Sora';color:#FAF8F6">♪</div><span style="font:700 17px 'Sora';color:#1A1614">ChordsNote</span></div>
+              <div style="width:34px;height:34px;border-radius:999px;background:#F0EBE7;border:1px solid #E6DFDA;display:flex;align-items:center;justify-content:center;font:600 12px 'Sora';color:#6B5F59">MR</div>
+            </div>
+          </div>
+
+          <div style="flex:1;overflow:auto;padding:8px 18px 12px">
+            <!-- catalogo generale -->
+            <div style="position:relative;overflow:hidden;border-radius:20px;background:linear-gradient(135deg,#C0301F,#E2523C);padding:20px 20px 18px;margin-bottom:22px">
+              <div style="font:600 10px 'Hanken Grotesk';letter-spacing:.2em;text-transform:uppercase;color:#F7C9C2">Catalogo generale</div>
+              <div style="font:700 24px 'Sora';color:#fff;margin:5px 0 3px;letter-spacing:-.02em">Tutte le canzoni</div>
+              <div style="font:400 13px 'Hanken Grotesk';color:#F5BDB4">183 brani · da tutti i cataloghi</div>
+              <div style="display:flex;gap:8px;margin-top:16px">
+                <button style="display:flex;align-items:center;gap:6px;background:#FAF8F6;border:none;border-radius:999px;padding:9px 15px;font:700 13px 'Sora';color:#D93A2B;cursor:pointer">Apri</button>
+                <button style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.14);border:none;border-radius:999px;padding:9px 15px;font:600 13px 'Sora';color:#fff;cursor:pointer">Cerca</button>
+              </div>
+              <div style="position:absolute;right:-26px;bottom:-30px;width:126px;height:126px;border-radius:999px;border:22px solid rgba(255,255,255,.07)"></div>
+            </div>
+
+            <!-- cataloghi personali -->
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:0 4px 10px">
+              <span style="font:600 12px 'Hanken Grotesk';letter-spacing:.05em;color:#9A8C84">I MIEI CATALOGHI</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:22px">
+              <div style="display:flex;align-items:center;gap:14px;background:#FFFFFF;border-radius:14px;padding:14px 16px">
+                <div style="width:6px;height:38px;border-radius:99px;background:#D93A2B;flex-shrink:0"></div>
+                <div style="flex:1;min-width:0"><div style="font:600 16px 'Sora';color:#1A1614">Personale</div><div style="font:400 12px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">48 brani · 3 scalette</div></div>
+                <span style="font:400 20px 'Sora';color:#C9BDB6">›</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;background:#FFFFFF;border-radius:14px;padding:14px 16px">
+                <div style="width:6px;height:38px;border-radius:99px;background:#D99A2E;flex-shrink:0"></div>
+                <div style="flex:1;min-width:0"><div style="font:600 16px 'Sora';color:#1A1614">Idee &amp; Bozze</div><div style="font:400 12px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">9 brani</div></div>
+                <span style="font:400 20px 'Sora';color:#C9BDB6">›</span>
+              </div>
+            </div>
+
+            <!-- cataloghi band -->
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:0 4px 10px">
+              <span style="font:600 12px 'Hanken Grotesk';letter-spacing:.05em;color:#9A8C84">CATALOGHI BAND · 3</span>
+              <span style="font:600 12px 'Hanken Grotesk';color:#D93A2B">Gestisci</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:13px;background:#FFFFFF;border-radius:14px;padding:14px 16px">
+                <div style="width:38px;height:38px;border-radius:11px;background:#DCEAF2;display:flex;align-items:center;justify-content:center;font:700 15px 'Sora';color:#2A6A88;flex-shrink:0">N</div>
+                <div style="flex:1;min-width:0"><div style="font:600 16px 'Sora';color:#1A1614">I Notturni</div><div style="font:400 12px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">126 brani · 5 scalette</div></div>
+                <div style="display:flex;align-items:center">
+                  <div style="width:23px;height:23px;border-radius:999px;background:#C0301F;border:1.5px solid #FFFFFF;font:600 9px 'Sora';color:#1A1614;display:flex;align-items:center;justify-content:center">L</div>
+                  <div style="width:23px;height:23px;border-radius:999px;background:#2E6E8B;border:1.5px solid #FFFFFF;margin-left:-7px;font:600 9px 'Sora';color:#1A1614;display:flex;align-items:center;justify-content:center">G</div>
+                  <div style="width:23px;height:23px;border-radius:999px;background:#7A5E8B;border:1.5px solid #FFFFFF;margin-left:-7px;font:600 8px 'Sora';color:#1A1614;display:flex;align-items:center;justify-content:center">+2</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:13px;background:#FFFFFF;border-radius:14px;padding:14px 16px">
+                <div style="width:38px;height:38px;border-radius:11px;background:#E6F0D4;display:flex;align-items:center;justify-content:center;font:700 15px 'Sora';color:#5A7A28;flex-shrink:0">W</div>
+                <div style="flex:1;min-width:0"><div style="font:600 16px 'Sora';color:#1A1614">Worship Domenica</div><div style="font:400 12px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">32 brani · 2 scalette</div></div>
+                <div style="display:flex;align-items:center">
+                  <div style="width:23px;height:23px;border-radius:999px;background:#F6E7C8;border:1.5px solid #FFFFFF;font:600 9px 'Sora';color:#1A1614;display:flex;align-items:center;justify-content:center">S</div>
+                  <div style="width:23px;height:23px;border-radius:999px;background:#C0301F;border:1.5px solid #FFFFFF;margin-left:-7px;font:600 8px 'Sora';color:#1A1614;display:flex;align-items:center;justify-content:center">+5</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:13px;background:#FFFFFF;border-radius:14px;padding:14px 16px">
+                <div style="width:38px;height:38px;border-radius:11px;background:#FADDE7;display:flex;align-items:center;justify-content:center;font:700 15px 'Sora';color:#9A3560;flex-shrink:0">D</div>
+                <div style="flex:1;min-width:0"><div style="font:600 16px 'Sora';color:#1A1614">Duo Acustico</div><div style="font:400 12px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">21 brani · 1 scaletta</div></div>
+                <div style="width:23px;height:23px;border-radius:999px;background:#2E6E8B;font:600 9px 'Sora';color:#1A1614;display:flex;align-items:center;justify-content:center">G</div>
+              </div>
+              <button style="margin-top:2px;display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;border:1.5px dashed #E6DFDA;border-radius:14px;padding:14px;font:600 14px 'Sora';color:#9A8C84;cursor:pointer"><span style="font-size:17px;line-height:0">＋</span> Nuovo catalogo</button>
+            </div>
+          </div>
+
+          <div style="flex-shrink:0;display:flex;padding:10px 20px 30px;background:rgba(250,248,246,.94);border-top:1px solid #F7F4F2;backdrop-filter:blur(8px)">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><div style="display:flex;flex-direction:column;gap:3px;align-items:center"><div style="width:18px;height:4px;border-radius:2px;background:#D93A2B"></div><div style="width:18px;height:4px;border-radius:2px;background:#D93A2B"></div><div style="width:12px;height:4px;border-radius:2px;background:#D93A2B"></div></div><span style="font:600 10px 'Hanken Grotesk';color:#D93A2B">Cataloghi</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><div style="position:relative;width:19px;height:19px"><div style="width:14px;height:14px;border:2px solid #A79890;border-radius:999px"></div><div style="position:absolute;right:0;bottom:1px;width:7px;height:2.2px;background:#A79890;border-radius:2px;transform:rotate(45deg)"></div></div><span style="font:500 10px 'Hanken Grotesk';color:#A79890">Cerca</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><div style="display:flex;flex-direction:column;gap:2.5px;padding-top:2px"><div style="width:15px;height:3px;border-radius:2px;background:#A79890"></div><div style="width:15px;height:3px;border-radius:2px;background:#A79890"></div><div style="width:15px;height:3px;border-radius:2px;background:#A79890"></div></div><span style="font:500 10px 'Hanken Grotesk';color:#A79890">Scalette</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><div style="display:flex;flex-direction:column;align-items:center;gap:2px;padding-top:1px"><div style="width:9px;height:9px;border-radius:999px;background:#A79890"></div><div style="width:16px;height:8px;border-radius:8px 8px 0 0;background:#A79890"></div></div><span style="font:500 10px 'Hanken Grotesk';color:#A79890">Profilo</span></div>
+          </div>
+        </div>
+      </x-import>
+      <div style="font:500 13px 'Hanken Grotesk';color:#6B5F59"><span style="font-family:'JetBrains Mono';color:#D93A2B">01</span> &nbsp;Home · Catalogo generale + cataloghi band</div>
+    </div>
+
+    <!-- ═══════════════ 02 LISTA CANZONI ═══════════════ -->
+    <div data-screen-label="02 Lista canzoni" style="display:flex;flex-direction:column;gap:14px;align-items:center">
+      <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402px,874px">
+        <div style="position:relative;height:100%;display:flex;flex-direction:column;overflow:hidden;background:#FAF8F6;font-family:'Sora',sans-serif">
+          <div style="flex-shrink:0;padding:56px 20px 10px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+              <button style="width:36px;height:36px;border:none;border-radius:999px;background:#F0EBE7;color:#6B5F59;font:400 20px 'Sora';cursor:pointer">‹</button>
+              <div style="display:flex;gap:8px">
+                <button style="height:36px;padding:0 13px;border:none;border-radius:999px;background:#F0EBE7;color:#6B5F59;font:600 12px 'Hanken Grotesk';cursor:pointer">Esporta</button>
+                <button style="width:36px;height:36px;border:none;border-radius:999px;background:#F0EBE7;color:#6B5F59;font:400 17px 'Sora';cursor:pointer">···</button>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:5px">
+              <span style="font:700 25px 'Sora';color:#1A1614;letter-spacing:-.02em">I Notturni</span>
+              <span style="font:700 9px 'Hanken Grotesk';letter-spacing:.1em;color:#FAF8F6;background:#D93A2B;padding:3px 6px;border-radius:5px">BAND</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:9px">
+              <div style="font:400 13px 'Hanken Grotesk';color:#8A7C74">126 brani</div>
+              <div style="width:3px;height:3px;border-radius:999px;background:#C9BDB6"></div>
+              <div style="display:flex;align-items:center">
+                <div style="width:21px;height:21px;border-radius:999px;background:#C0301F;border:1.5px solid #FAF8F6;font:600 8px 'Sora';color:#1A1614;display:flex;align-items:center;justify-content:center">L</div>
+                <div style="width:21px;height:21px;border-radius:999px;background:#2E6E8B;border:1.5px solid #FAF8F6;margin-left:-7px;font:600 8px 'Sora';color:#1A1614;display:flex;align-items:center;justify-content:center">G</div>
+                <div style="width:21px;height:21px;border-radius:999px;background:#7A5E8B;border:1.5px solid #FAF8F6;margin-left:-7px;font:600 8px 'Sora';color:#1A1614;display:flex;align-items:center;justify-content:center">+2</div>
+              </div>
+              <div style="width:3px;height:3px;border-radius:999px;background:#C9BDB6"></div>
+              <div style="font:600 13px 'Hanken Grotesk';color:#D93A2B">Invita</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:9px;background:#FFFFFF;border-radius:12px;padding:11px 13px;margin-top:14px">
+              <div style="position:relative;width:15px;height:15px;flex-shrink:0"><div style="width:11px;height:11px;border:2px solid #A79890;border-radius:999px"></div><div style="position:absolute;right:0;bottom:0;width:6px;height:2px;background:#A79890;border-radius:2px;transform:rotate(45deg)"></div></div>
+              <span style="font:400 14px 'Hanken Grotesk';color:#9A8C84">Cerca per titolo o artista…</span>
+            </div>
+            <div style="display:flex;gap:7px;margin-top:11px;overflow-x:auto">
+              <span style="flex-shrink:0;font:600 12px 'Hanken Grotesk';color:#FAF8F6;background:#D93A2B;padding:6px 12px;border-radius:999px">Canzoni</span>
+              <span style="flex-shrink:0;font:600 12px 'Hanken Grotesk';color:#6B5F59;background:#F0EBE7;padding:6px 12px;border-radius:999px">Scalette · 5</span>
+              <span style="flex-shrink:0;font:600 12px 'Hanken Grotesk';color:#6B5F59;background:#F0EBE7;padding:6px 12px;border-radius:999px">Preferite</span>
+            </div>
+          </div>
+
+          <div style="flex:1;display:flex;overflow:hidden">
+            <div style="flex:1;overflow:auto;padding:6px 6px 96px 20px">
+              <div style="font:600 12px 'JetBrains Mono';color:#C9BDB6;padding:8px 0 4px">C</div>
+              <div style="display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px solid #FFFFFF">
+                <div style="width:38px;height:38px;border-radius:11px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font:700 13px 'JetBrains Mono';color:#D93A2B;flex-shrink:0">C</div>
+                <div style="flex:1;min-width:0"><div style="font:600 15px 'Sora';color:#1A1614;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Canto della sera</div><div style="font:400 12px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">L. Ferri</div></div>
+                <span style="font:400 14px 'Sora';color:#D93A2B">♥</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px solid #FFFFFF">
+                <div style="width:38px;height:38px;border-radius:11px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font:700 13px 'JetBrains Mono';color:#D93A2B;flex-shrink:0">Am</div>
+                <div style="flex:1;min-width:0"><div style="font:600 15px 'Sora';color:#1A1614;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Città vuote</div><div style="font:400 12px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">M. Bianchi</div></div>
+              </div>
+              <div style="font:600 12px 'JetBrains Mono';color:#C9BDB6;padding:14px 0 4px">F</div>
+              <div style="display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px solid #FFFFFF">
+                <div style="width:38px;height:38px;border-radius:11px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font:700 13px 'JetBrains Mono';color:#D93A2B;flex-shrink:0">A</div>
+                <div style="flex:1;min-width:0"><div style="font:600 15px 'Sora';color:#1A1614;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Ferma il tempo</div><div style="font:400 12px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">M. Bianchi</div></div>
+                <span style="font:400 14px 'Sora';color:#D93A2B">♥</span>
+              </div>
+              <div style="font:600 12px 'JetBrains Mono';color:#C9BDB6;padding:14px 0 4px">N</div>
+              <div style="display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px solid #FFFFFF">
+                <div style="width:38px;height:38px;border-radius:11px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font:700 13px 'JetBrains Mono';color:#D93A2B;flex-shrink:0">D</div>
+                <div style="flex:1;min-width:0"><div style="font:600 15px 'Sora';color:#1A1614;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Nebbia al mattino</div><div style="font:400 12px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">G. Sarti</div></div>
+              </div>
+              <div style="font:600 12px 'JetBrains Mono';color:#C9BDB6;padding:14px 0 4px">O</div>
+              <div style="display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px solid #FFFFFF">
+                <div style="width:38px;height:38px;border-radius:11px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font:700 13px 'JetBrains Mono';color:#D93A2B;flex-shrink:0">C</div>
+                <div style="flex:1;min-width:0"><div style="font:600 15px 'Sora';color:#1A1614;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Onde</div><div style="font:400 12px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">L. Ferri</div></div>
+              </div>
+              <div style="font:600 12px 'JetBrains Mono';color:#C9BDB6;padding:14px 0 4px">S</div>
+              <div style="display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px solid #FFFFFF">
+                <div style="width:38px;height:38px;border-radius:11px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font:700 13px 'JetBrains Mono';color:#D93A2B;flex-shrink:0">G</div>
+                <div style="flex:1;min-width:0"><div style="font:600 15px 'Sora';color:#1A1614;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Sotto lo stesso cielo</div><div style="font:400 12px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">M. Bianchi</div></div>
+                <span style="font:400 14px 'Sora';color:#D93A2B">♥</span>
+              </div>
+            </div>
+            <!-- indice alfabetico -->
+            <div style="flex-shrink:0;width:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:0 4px 96px 0">
+              <span style="font:600 9px 'JetBrains Mono';color:#D93A2B">A</span>
+              <span style="font:600 9px 'JetBrains Mono';color:#D93A2B">C</span>
+              <span style="font:600 9px 'JetBrains Mono';color:#C9BDB6">D</span>
+              <span style="font:600 9px 'JetBrains Mono';color:#D93A2B">F</span>
+              <span style="font:600 9px 'JetBrains Mono';color:#C9BDB6">G</span>
+              <span style="font:600 9px 'JetBrains Mono';color:#C9BDB6">I</span>
+              <span style="font:600 9px 'JetBrains Mono';color:#C9BDB6">L</span>
+              <span style="font:600 9px 'JetBrains Mono';color:#C9BDB6">M</span>
+              <span style="font:600 9px 'JetBrains Mono';color:#D93A2B">N</span>
+              <span style="font:600 9px 'JetBrains Mono';color:#D93A2B">O</span>
+              <span style="font:600 9px 'JetBrains Mono';color:#C9BDB6">P</span>
+              <span style="font:600 9px 'JetBrains Mono';color:#C9BDB6">R</span>
+              <span style="font:600 9px 'JetBrains Mono';color:#D93A2B">S</span>
+              <span style="font:600 9px 'JetBrains Mono';color:#C9BDB6">T</span>
+              <span style="font:600 9px 'JetBrains Mono';color:#C9BDB6">V</span>
+              <span style="font:600 9px 'JetBrains Mono';color:#C9BDB6">Z</span>
+            </div>
+          </div>
+
+          <div style="position:absolute;left:0;right:0;bottom:0;padding:14px 20px 30px;background:linear-gradient(transparent,#FAF8F6 40%);display:flex;justify-content:flex-end">
+            <button style="display:flex;align-items:center;gap:7px;background:#D93A2B;border:none;border-radius:999px;padding:13px 19px;font:700 14px 'Sora';color:#FAF8F6;cursor:pointer;box-shadow:0 12px 26px rgba(0,0,0,.08)"><span style="font-size:17px;line-height:0">＋</span> Nuovo brano</button>
+          </div>
+        </div>
+      </x-import>
+      <div style="font:500 13px 'Hanken Grotesk';color:#6B5F59"><span style="font-family:'JetBrains Mono';color:#D93A2B">02</span> &nbsp;Lista canzoni · ricerca, indice A–Z, export</div>
+    </div>
+
+    <!-- ═══════════════ 03 VIEWER ═══════════════ -->
+    <div data-screen-label="03 Viewer canzone" style="display:flex;flex-direction:column;gap:14px;align-items:center">
+      <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402px,874px">
+        <div style="position:relative;height:100%;display:flex;flex-direction:column;overflow:hidden;background:#FAF8F6;font-family:'Sora',sans-serif">
+          <div style="flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:56px 20px 14px">
+            <button style="width:36px;height:36px;border:none;border-radius:999px;background:#F0EBE7;color:#6B5F59;font:400 20px 'Sora';cursor:pointer">‹</button>
+            <div style="text-align:center;min-width:0;padding:0 8px">
+              <div style="font:600 14px 'Sora';color:#1A1614;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Sotto lo stesso cielo</div>
+              <div style="font:400 11px 'Hanken Grotesk';color:#9A8C84">Tono G · 92 bpm · 4:12</div>
+            </div>
+            <button style="width:36px;height:36px;border:none;border-radius:999px;background:#D93A2B;color:#FAF8F6;font:700 17px 'Sora';cursor:pointer;line-height:0">···</button>
+          </div>
+
+          <div style="flex:1;overflow:auto;padding:6px 24px 40px">
+            <div style="margin-bottom:26px">
+              <div style="display:flex;align-items:baseline;gap:9px"><span style="font:700 12px 'Hanken Grotesk';letter-spacing:.18em;color:#9A8C84">INTRO</span><span style="flex:1;height:1px;background:#F7F4F2"></span></div>
+              <div style="font:400 11px/1.4 'Hanken Grotesk';font-style:italic;color:#B4832A;margin:3px 0 10px">soft · solo chitarra arpeggiata</div>
+              <div style="display:flex;gap:22px"><span style="font:700 15px 'JetBrains Mono';color:#D93A2B">G</span><span style="font:700 15px 'JetBrains Mono';color:#D93A2B">D</span><span style="font:700 15px 'JetBrains Mono';color:#D93A2B">Em</span><span style="font:700 15px 'JetBrains Mono';color:#D93A2B">C</span></div>
+            </div>
+
+            <div style="margin-bottom:26px">
+              <div style="display:flex;align-items:baseline;gap:9px"><span style="font:700 12px 'Hanken Grotesk';letter-spacing:.18em;color:#9A8C84">STROFA 1</span><span style="flex:1;height:1px;background:#F7F4F2"></span></div>
+              <div style="font:400 11px/1.4 'Hanken Grotesk';font-style:italic;color:#B4832A;margin:3px 0 12px">entra il basso · voce trattenuta</div>
+              <div style="display:flex;flex-wrap:wrap;align-items:flex-end;margin-bottom:8px">
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">G</span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">Sotto </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px"></span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">lo </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">D</span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">stesso </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px"></span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">cielo ci </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">Em</span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">siamo </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">C</span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">noi</span></span>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;align-items:flex-end">
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">G</span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">due </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px"></span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">voci nel </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">D</span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">buio che non </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">C</span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">si perdono </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">D</span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">mai</span></span>
+              </div>
+            </div>
+
+            <div style="margin-bottom:26px">
+              <div style="display:flex;align-items:baseline;gap:9px"><span style="font:700 12px 'Hanken Grotesk';letter-spacing:.18em;color:#D93A2B">RITORNELLO</span><span style="flex:1;height:1px;background:#FBE3DF"></span></div>
+              <div style="font:400 11px/1.4 'Hanken Grotesk';font-style:italic;color:#B4832A;margin:3px 0 12px">carica · entra batteria · cori</div>
+              <div style="display:flex;flex-wrap:wrap;align-items:flex-end;margin-bottom:8px">
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">Em</span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">Canta </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px"></span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">con </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">C</span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">me, </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">G</span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">non ti </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">D</span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">lasciare</span></span>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;align-items:flex-end">
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">Em</span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">questa </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px"></span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">notte </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">C</span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">sa di </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">D</span><span style="font:500 21px/29px 'Sora';color:#1A1614;white-space:pre">ricominciare</span></span>
+              </div>
+            </div>
+
+            <div>
+              <div style="display:flex;align-items:baseline;gap:9px"><span style="font:700 12px 'Hanken Grotesk';letter-spacing:.18em;color:#9A8C84">BRIDGE</span><span style="flex:1;height:1px;background:#F7F4F2"></span></div>
+              <div style="font:400 11px/1.4 'Hanken Grotesk';font-style:italic;color:#B4832A;margin:3px 0 12px">tutto si ferma · solo voce e piano</div>
+              <div style="display:flex;flex-wrap:wrap;align-items:flex-end">
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">Am</span><span style="font:500 21px/29px 'Sora';color:#3A322E;white-space:pre">Resta </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">C</span><span style="font:500 21px/29px 'Sora';color:#3A322E;white-space:pre">ancora un </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 13px/18px 'JetBrains Mono';color:#D93A2B;height:20px">D</span><span style="font:500 21px/29px 'Sora';color:#3A322E;white-space:pre">po'</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- menu opzioni aperto -->
+          <div style="position:absolute;inset:0;background:rgba(0,0,0,.05);z-index:8"></div>
+          <div style="position:absolute;left:14px;right:14px;bottom:24px;z-index:9;background:#F7F4F2;border:1px solid #E6DFDA;border-radius:20px;padding:8px;box-shadow:0 20px 44px rgba(0,0,0,.10)">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px 12px">
+              <span style="font:700 13px 'Sora';color:#1A1614">Opzioni brano</span>
+              <span style="font:400 17px 'Sora';color:#9A8C84">✕</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;background:#FFFFFF;border-radius:14px;padding:12px 14px;margin-bottom:6px">
+              <div><div style="font:600 14px 'Sora';color:#1A1614">Trasponi</div><div style="font:400 11px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">originale G · +0 semitoni</div></div>
+              <div style="display:flex;align-items:center;gap:3px">
+                <button style="width:34px;height:34px;border:none;border-radius:10px;background:#E6DFDA;color:#1A1614;font:400 21px 'Sora';cursor:pointer;line-height:0">−</button>
+                <span style="font:700 16px 'Sora';color:#D93A2B;width:30px;text-align:center">G</span>
+                <button style="width:34px;height:34px;border:none;border-radius:10px;background:#E6DFDA;color:#1A1614;font:400 21px 'Sora';cursor:pointer;line-height:0">+</button>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              <div style="display:flex;align-items:center;gap:13px;padding:12px 14px;border-bottom:1px solid #EFE9E5"><span style="font:400 15px 'Sora';color:#D93A2B;width:18px">✎</span><span style="font:500 15px 'Sora';color:#1A1614">Modifica brano</span></div>
+              <div style="display:flex;align-items:center;gap:13px;padding:12px 14px;border-bottom:1px solid #EFE9E5"><span style="font:400 15px 'Sora';color:#D93A2B;width:18px">⇪</span><span style="font:500 15px 'Sora';color:#1A1614">Esporta PDF</span></div>
+              <div style="display:flex;align-items:center;gap:13px;padding:12px 14px;border-bottom:1px solid #EFE9E5"><span style="font:400 15px 'Sora';color:#D93A2B;width:18px">≡</span><span style="font:500 15px 'Sora';color:#1A1614">Aggiungi a scaletta</span></div>
+              <div style="display:flex;align-items:center;gap:13px;padding:12px 14px;border-bottom:1px solid #EFE9E5"><span style="font:400 15px 'Sora';color:#D93A2B;width:18px">↕</span><span style="font:500 15px 'Sora';color:#1A1614">Auto-scroll</span><span style="margin-left:auto;font:400 12px 'Hanken Grotesk';color:#9A8C84">92 bpm</span></div>
+              <div style="display:flex;align-items:center;gap:13px;padding:12px 14px"><span style="font:400 15px 'Sora';color:#D93A2B;width:18px">A</span><span style="font:500 15px 'Sora';color:#1A1614">Dimensione testo</span></div>
+            </div>
+          </div>
+        </div>
+      </x-import>
+      <div style="font:500 13px 'Hanken Grotesk';color:#6B5F59"><span style="font-family:'JetBrains Mono';color:#D93A2B">03</span> &nbsp;Viewer · sezioni, note di dinamica, menu opzioni</div>
+    </div>
+
+    <!-- ═══════════════ 04 EDITOR ═══════════════ -->
+    <div data-screen-label="04 Editor canzone" style="display:flex;flex-direction:column;gap:14px;align-items:center">
+      <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402px,874px">
+        <div style="height:100%;display:flex;flex-direction:column;overflow:hidden;background:#FAF8F6;font-family:'Sora',sans-serif">
+          <div style="flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:56px 18px 12px;border-bottom:1px solid #F7F4F2">
+            <button style="background:transparent;border:none;font:400 15px 'Hanken Grotesk';color:#8A7C74;cursor:pointer">Annulla</button>
+            <div style="text-align:center"><div style="font:600 14px 'Sora';color:#1A1614">Modifica brano</div><div style="font:400 11px 'Hanken Grotesk';color:#A79890">salvato 12:04</div></div>
+            <button style="background:#D93A2B;border:none;border-radius:999px;padding:7px 16px;font:700 13px 'Sora';color:#FAF8F6;cursor:pointer">Salva</button>
+          </div>
+
+          <!-- meta brano -->
+          <div style="flex-shrink:0;padding:14px 18px 12px;border-bottom:1px solid #F7F4F2">
+            <div style="font:500 20px 'Sora';color:#1A1614;letter-spacing:-.01em">Sotto lo stesso cielo</div>
+            <div style="font:400 13px 'Hanken Grotesk';color:#8A7C74;margin-top:2px">M. Bianchi</div>
+            <div style="display:flex;gap:8px;margin-top:12px">
+              <div style="flex:1;background:#FFFFFF;border-radius:11px;padding:8px 10px"><div style="font:600 9px 'Hanken Grotesk';letter-spacing:.14em;color:#A79890">TONALITÀ</div><div style="display:flex;align-items:baseline;gap:4px;margin-top:2px"><span style="font:700 16px 'Sora';color:#D93A2B">G</span><span style="font:400 11px 'Hanken Grotesk';color:#9A8C84">orig.</span></div></div>
+              <div style="flex:1;background:#FFFFFF;border-radius:11px;padding:8px 10px"><div style="font:600 9px 'Hanken Grotesk';letter-spacing:.14em;color:#A79890">BPM</div><div style="font:700 16px 'Sora';color:#1A1614;margin-top:2px">92</div></div>
+              <div style="flex:1;background:#FFFFFF;border-radius:11px;padding:8px 10px"><div style="font:600 9px 'Hanken Grotesk';letter-spacing:.14em;color:#A79890">DURATA</div><div style="font:700 16px 'Sora';color:#1A1614;margin-top:2px">4:12</div></div>
+            </div>
+          </div>
+
+          <!-- tab modalità -->
+          <div style="flex-shrink:0;display:flex;gap:5px;padding:11px 18px 10px">
+            <span style="font:600 12px 'Hanken Grotesk';color:#FAF8F6;background:#D93A2B;padding:7px 13px;border-radius:999px">Testo</span>
+            <span style="font:600 12px 'Hanken Grotesk';color:#6B5F59;background:#F0EBE7;padding:7px 13px;border-radius:999px">Accordi</span>
+            <span style="font:600 12px 'Hanken Grotesk';color:#6B5F59;background:#F0EBE7;padding:7px 13px;border-radius:999px">Struttura</span>
+            <span style="font:600 12px 'Hanken Grotesk';color:#6B5F59;background:#F0EBE7;padding:7px 13px;border-radius:999px">Dinamica</span>
+          </div>
+
+          <div style="flex:1;overflow:auto;padding:4px 18px 16px">
+            <!-- sezione con handle -->
+            <div style="background:#F2EFEC;border:1px solid #F0EBE7;border-radius:16px;padding:12px 13px 14px;margin-bottom:10px">
+              <div style="display:flex;align-items:center;gap:9px;margin-bottom:8px">
+                <span style="font:400 14px 'Sora';color:#C9BDB6;cursor:grab">⠿</span>
+                <span style="font:700 11px 'Hanken Grotesk';letter-spacing:.16em;color:#D93A2B">STROFA 1</span>
+                <div style="flex:1"></div>
+                <span style="font:400 15px 'Sora';color:#A79890">···</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:7px;background:#F7F4F2;border-radius:9px;padding:7px 10px;margin-bottom:10px">
+                <span style="font:400 12px 'Sora';color:#B4832A">♪</span>
+                <span style="font:400 12px 'Hanken Grotesk';font-style:italic;color:#8A6420">entra il basso · voce trattenuta</span>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;align-items:flex-end;margin-bottom:6px">
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 12px/17px 'JetBrains Mono';color:#D93A2B;height:19px;border-bottom:1.5px dotted #FBE3DF">G</span><span style="font:400 15px/23px 'JetBrains Mono';color:#1A1614;white-space:pre">Sotto </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 12px/17px 'JetBrains Mono';color:#D93A2B;height:19px"></span><span style="font:400 15px/23px 'JetBrains Mono';color:#1A1614;white-space:pre">lo </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 12px/17px 'JetBrains Mono';color:#D93A2B;height:19px;border-bottom:1.5px dotted #FBE3DF">D</span><span style="font:400 15px/23px 'JetBrains Mono';color:#1A1614;white-space:pre">stesso </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 12px/17px 'JetBrains Mono';color:#D93A2B;height:19px"></span><span style="font:400 15px/23px 'JetBrains Mono';color:#1A1614;white-space:pre">cielo ci </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 12px/17px 'JetBrains Mono';color:#D93A2B;height:19px;background:#F7D5CF;border-radius:4px;padding:0 3px">Em</span><span style="font:400 15px/23px 'JetBrains Mono';color:#1A1614;white-space:pre">siamo </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 12px/17px 'JetBrains Mono';color:#D93A2B;height:19px;border-bottom:1.5px dotted #FBE3DF">C</span><span style="font:400 15px/23px 'JetBrains Mono';color:#1A1614;white-space:pre">noi</span></span>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;align-items:flex-end">
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 12px/17px 'JetBrains Mono';color:#D93A2B;height:19px;border-bottom:1.5px dotted #FBE3DF">G</span><span style="font:400 15px/23px 'JetBrains Mono';color:#1A1614;white-space:pre">due </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 12px/17px 'JetBrains Mono';color:#D93A2B;height:19px"></span><span style="font:400 15px/23px 'JetBrains Mono';color:#1A1614;white-space:pre">voci nel </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 12px/17px 'JetBrains Mono';color:#D93A2B;height:19px;border-bottom:1.5px dotted #FBE3DF">D</span><span style="font:400 15px/23px 'JetBrains Mono';color:#1A1614;white-space:pre">buio</span></span>
+              </div>
+            </div>
+
+            <div style="background:#F2EFEC;border:1px solid #F0EBE7;border-radius:16px;padding:12px 13px 14px;margin-bottom:10px">
+              <div style="display:flex;align-items:center;gap:9px;margin-bottom:8px">
+                <span style="font:400 14px 'Sora';color:#C9BDB6;cursor:grab">⠿</span>
+                <span style="font:700 11px 'Hanken Grotesk';letter-spacing:.16em;color:#D93A2B">RITORNELLO</span>
+                <div style="flex:1"></div>
+                <span style="font:400 15px 'Sora';color:#A79890">···</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:7px;background:#F7F4F2;border-radius:9px;padding:7px 10px;margin-bottom:10px">
+                <span style="font:400 12px 'Sora';color:#B4832A">♪</span>
+                <span style="font:400 12px 'Hanken Grotesk';font-style:italic;color:#8A6420">carica · entra batteria · cori</span>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;align-items:flex-end">
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 12px/17px 'JetBrains Mono';color:#D93A2B;height:19px;border-bottom:1.5px dotted #FBE3DF">Em</span><span style="font:400 15px/23px 'JetBrains Mono';color:#1A1614;white-space:pre">Canta </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 12px/17px 'JetBrains Mono';color:#D93A2B;height:19px"></span><span style="font:400 15px/23px 'JetBrains Mono';color:#1A1614;white-space:pre">con </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 12px/17px 'JetBrains Mono';color:#D93A2B;height:19px;border-bottom:1.5px dotted #FBE3DF">C</span><span style="font:400 15px/23px 'JetBrains Mono';color:#1A1614;white-space:pre">me, </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 12px/17px 'JetBrains Mono';color:#D93A2B;height:19px;border-bottom:1.5px dotted #FBE3DF">G</span><span style="font:400 15px/23px 'JetBrains Mono';color:#1A1614;white-space:pre">non ti </span></span>
+                <span style="display:inline-flex;flex-direction:column"><span style="font:700 12px/17px 'JetBrains Mono';color:#D93A2B;height:19px;border-bottom:1.5px dotted #FBE3DF">D</span><span style="font:400 15px/23px 'JetBrains Mono';color:#1A1614;white-space:pre">lasciare</span></span>
+              </div>
+            </div>
+
+            <button style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;border:1.5px dashed #E6DFDA;border-radius:14px;padding:13px;font:600 13px 'Sora';color:#9A8C84;cursor:pointer"><span style="font-size:16px;line-height:0">＋</span> Aggiungi sezione</button>
+          </div>
+
+          <!-- toolbar accordi -->
+          <div style="flex-shrink:0;display:flex;gap:7px;padding:9px 14px;overflow-x:auto;background:#F2EFEC;border-top:1px solid #F0EBE7">
+            <button style="flex-shrink:0;display:flex;align-items:center;gap:5px;background:#D93A2B;border:none;border-radius:10px;padding:9px 12px;font:700 13px 'JetBrains Mono';color:#FAF8F6;cursor:pointer"><span style="font-size:14px;line-height:0">＋</span>Accordo</button>
+            <button style="flex-shrink:0;background:#F0EBE7;border:1px solid #E6DFDA;border-radius:10px;padding:9px 13px;font:700 13px 'JetBrains Mono';color:#D93A2B;cursor:pointer">G</button>
+            <button style="flex-shrink:0;background:#F0EBE7;border:1px solid #E6DFDA;border-radius:10px;padding:9px 13px;font:700 13px 'JetBrains Mono';color:#D93A2B;cursor:pointer">D</button>
+            <button style="flex-shrink:0;background:#F0EBE7;border:1px solid #E6DFDA;border-radius:10px;padding:9px 13px;font:700 13px 'JetBrains Mono';color:#D93A2B;cursor:pointer">Em</button>
+            <button style="flex-shrink:0;background:#F0EBE7;border:1px solid #E6DFDA;border-radius:10px;padding:9px 13px;font:700 13px 'JetBrains Mono';color:#D93A2B;cursor:pointer">C</button>
+            <button style="flex-shrink:0;background:#F0EBE7;border:1px solid #E6DFDA;border-radius:10px;padding:9px 13px;font:700 13px 'JetBrains Mono';color:#6B5F59;cursor:pointer">♪</button>
+          </div>
+
+          <x-import component-from-global-scope="IOSKeyboard" from="./ios-frame.jsx" hint-size="100%,300px"></x-import>
+        </div>
+      </x-import>
+      <div style="font:500 13px 'Hanken Grotesk';color:#6B5F59"><span style="font-family:'JetBrains Mono';color:#D93A2B">04</span> &nbsp;Editor · testo, accordi, struttura, dinamica</div>
+    </div>
+
+    <!-- ═══════════════ 05 SCALETTE ═══════════════ -->
+    <div data-screen-label="05 Scaletta" style="display:flex;flex-direction:column;gap:14px;align-items:center">
+      <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402px,874px">
+        <div style="position:relative;height:100%;display:flex;flex-direction:column;overflow:hidden;background:#FAF8F6;font-family:'Sora',sans-serif">
+          <div style="flex-shrink:0;padding:56px 20px 12px;border-bottom:1px solid #F7F4F2">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+              <button style="width:36px;height:36px;border:none;border-radius:999px;background:#F0EBE7;color:#6B5F59;font:400 20px 'Sora';cursor:pointer">‹</button>
+              <div style="display:flex;gap:8px">
+                <button style="height:36px;padding:0 13px;border:none;border-radius:999px;background:#F0EBE7;color:#6B5F59;font:600 12px 'Hanken Grotesk';cursor:pointer">Condividi</button>
+                <button style="width:36px;height:36px;border:none;border-radius:999px;background:#F0EBE7;color:#6B5F59;font:400 17px 'Sora';cursor:pointer">···</button>
+              </div>
+            </div>
+            <div style="font:600 10px 'Hanken Grotesk';letter-spacing:.2em;text-transform:uppercase;color:#D93A2B">Scaletta · I Notturni</div>
+            <div style="font:700 24px/1.2 'Sora';color:#1A1614;margin-top:4px;letter-spacing:-.02em">Live @ Blue Note Club</div>
+            <div style="display:flex;align-items:center;gap:9px;margin-top:6px">
+              <span style="font:400 13px 'Hanken Grotesk';color:#8A7C74">Ven 14 ago · 21:30</span>
+              <div style="width:3px;height:3px;border-radius:999px;background:#C9BDB6"></div>
+              <span style="font:400 13px 'Hanken Grotesk';color:#8A7C74">12 brani · 48 min</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:8px;background:#F7F4F2;border-radius:11px;padding:10px 12px;margin-top:13px">
+              <span style="font:400 12px 'Sora';color:#B4832A;line-height:1.5">✎</span>
+              <span style="font:400 12px/1.5 'Hanken Grotesk';color:#8A6420">Soundcheck alle 19:00. Set unico senza pausa, Luca parla dopo il brano 6.</span>
+            </div>
+          </div>
+
+          <div style="flex:1;overflow:auto;padding:12px 18px 100px">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:0 4px 10px">
+              <span style="font:600 12px 'Hanken Grotesk';letter-spacing:.05em;color:#9A8C84">ORDINE</span>
+              <span style="font:600 12px 'Hanken Grotesk';color:#D93A2B">Riordina</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <div style="display:flex;align-items:center;gap:11px;background:#FFFFFF;border-radius:13px;padding:12px 13px">
+                <span style="font:400 14px 'Sora';color:#C9BDB6;cursor:grab">⠿</span>
+                <span style="font:600 14px 'JetBrains Mono';color:#D93A2B;width:16px">1</span>
+                <div style="flex:1;min-width:0"><div style="font:600 15px 'Sora';color:#1A1614;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Sotto lo stesso cielo</div><div style="font:400 11px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">G · 92 bpm · 4:12</div></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:11px;background:#FFFFFF;border-radius:13px;padding:12px 13px">
+                <span style="font:400 14px 'Sora';color:#C9BDB6;cursor:grab">⠿</span>
+                <span style="font:600 14px 'JetBrains Mono';color:#D93A2B;width:16px">2</span>
+                <div style="flex:1;min-width:0"><div style="font:600 15px 'Sora';color:#1A1614;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Ferma il tempo</div><div style="font:400 11px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">A · 120 bpm · 3:40</div></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:9px;padding:3px 6px">
+                <span style="font:400 11px 'Sora';color:#B4832A">✎</span>
+                <span style="font:400 11px/1.4 'Hanken Grotesk';font-style:italic;color:#B4832A">cambio chitarra · accordare in Drop D</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:11px;background:#FFFFFF;border-radius:13px;padding:12px 13px">
+                <span style="font:400 14px 'Sora';color:#C9BDB6;cursor:grab">⠿</span>
+                <span style="font:600 14px 'JetBrains Mono';color:#D93A2B;width:16px">3</span>
+                <div style="flex:1;min-width:0"><div style="font:600 15px 'Sora';color:#1A1614;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Nebbia al mattino</div><div style="font:400 11px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">D · 78 bpm · 4:55</div></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:11px;background:#FFFFFF;border-radius:13px;padding:12px 13px;opacity:.65">
+                <span style="font:400 14px 'Sora';color:#C9BDB6;cursor:grab">⠿</span>
+                <span style="font:600 14px 'JetBrains Mono';color:#D93A2B;width:16px">4</span>
+                <div style="flex:1;min-width:0"><div style="font:600 15px 'Sora';color:#1A1614;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Onde</div><div style="font:400 11px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">C · 100 bpm · 3:58</div></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:11px;background:#FFFFFF;border-radius:13px;padding:12px 13px;opacity:.65">
+                <span style="font:400 14px 'Sora';color:#C9BDB6;cursor:grab">⠿</span>
+                <span style="font:600 14px 'JetBrains Mono';color:#D93A2B;width:16px">5</span>
+                <div style="flex:1;min-width:0"><div style="font:600 15px 'Sora';color:#1A1614;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Città vuote</div><div style="font:400 11px 'Hanken Grotesk';color:#8A7C74;margin-top:1px">Am · 108 bpm · 4:20</div></div>
+              </div>
+              <button style="margin-top:3px;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;border:1.5px dashed #E6DFDA;border-radius:13px;padding:13px;font:600 13px 'Sora';color:#9A8C84;cursor:pointer"><span style="font-size:16px;line-height:0">＋</span> Aggiungi brano</button>
+              <button style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;border:1.5px dashed #E6DFDA;border-radius:13px;padding:13px;font:600 13px 'Sora';color:#9A8C84;cursor:pointer"><span style="font-size:14px;line-height:0">✎</span> Aggiungi nota</button>
+            </div>
+          </div>
+
+          <div style="position:absolute;left:0;right:0;bottom:0;padding:14px 20px 30px;background:linear-gradient(transparent,#FAF8F6 40%)">
+            <button style="width:100%;background:#D93A2B;border:none;border-radius:14px;padding:15px;font:700 15px 'Sora';color:#FAF8F6;cursor:pointer;box-shadow:0 12px 26px rgba(0,0,0,.08)">▶ Avvia il set</button>
+          </div>
+        </div>
+      </x-import>
+      <div style="font:500 13px 'Hanken Grotesk';color:#6B5F59"><span style="font-family:'JetBrains Mono';color:#D93A2B">05</span> &nbsp;Scaletta · riordino, note, avvio set</div>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+</body>
+</html>

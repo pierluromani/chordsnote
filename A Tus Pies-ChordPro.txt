@@ -1,0 +1,85 @@
+{title: A Tus Pies}
+{artist: Orig: LA/Nostra: LA}
+{key: A}
+{meta: transposeKeyName A}
+{meta: stickyNotePosition 0.000000,0.000000}
+
+{meta: Section Verse Danilo}
+A tus [A]pies, arde mi cora[E/G#]zón
+A tus [F#m]pies, entrego lo que [D]soy
+Es el lu[A]gar, de mi seguri[E/G#]dad
+Donde [F#m]nadie, me puede seña[D]lar
+
+{meta: Section Pre-Chorus Danilo}
+Me perdo[D]naste,
+Me acercaste a tu pre[E]sencia
+Me levant[F#m]aste,
+Hoy me postro ador[E]arte.
+
+{meta: Section Chorus Pietro E Danilo}
+No hay lu[A/C#]gar más [D]alto
+Más [E]grande
+Que estar a tus [F#m]pies
+Que estar a tus [A/C#]pies 
+
+No hay lugar más [D]alto
+Más [E]grande
+Que estar a tus [F#m]pies
+Que estar a tus [E/G#]pies 
+
+{meta: Section Verse Pietro}
+A tus [A]pies, arde mi cora[E/G#]zón
+A tus [F#m]pies, entrego lo que [D]soy
+Es el lu[A]gar, de mi seguri[E/G#]dad
+Donde [F#m]nadie, me puede seña[D]lar
+
+{meta: Section Pre-Chorus Danilo E Pietro}
+Me perdo[D]naste,
+Me acercaste a tu pre[E]sencia
+Me levant[F#m]aste,
+Hoy me postro ador[E]arte.
+
+{meta: Section Chorus Rossana Daniela e Pietro}
+Non c é lu[A/C#]ogo più [D]alto
+Più [E]grande
+Che stare ai Tuoi [F#m]piedi
+Che stare ai Tuoi [A/C#]piedi
+
+Non c é luogo più [D]alto
+Più [E]grande
+Che stare ai Tuoi [F#m]piedi
+Che stare ai Tuoi [E/G#]piedi
+
+{meta: Section Bridge Danilo, Daniela 2°, Pietro E Rossana}
+É qu[D]í che voglio res[E]tar
+Pros[A]trato [E/G#]ai tuoi [F#m]piedi
+E [D]qui che voglio res[E]tar
+Ai piedi [F#m]Tuoi [E/G#]
+
+É qu[D]í che voglio res[E]tar
+Pros[A]trato [E/G#]ai tuoi [F#m]piedi
+E [D]qui che voglio res[E]tar
+Ai piedi [F#m]Tuoi [E/G#]
+
+{meta: Section Chorus SOFT Danilo }
+No hay lu[A/C#]gar más [D]alto
+Más [E]grande
+Que estar a tus [F#m]pies
+Que estar a tus [A/C#]pies 
+
+No hay lugar más [D]alto
+Más [E]grande
+Que estar a tus [F#m]pies
+[carica batteria]
+Que estar a tus [E/G#]pies 
+
+{meta: Section Bridge Danilo Pietro Rossana e Daniela}
+Y Aq[D]ui permanece[E]re 
+Post[A]rado [E/G#]a tus pi[F#m]es
+Y Aq[D]ui permanece[E]re
+A Los pies de Cr[F#m]isto [E/G#]
+
+A Los pies de Cr[D]isto [E]
+
+[finale rallentato]
+A Los pies de Cr[A]isto

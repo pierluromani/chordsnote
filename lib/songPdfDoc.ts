@@ -217,9 +217,9 @@ function drawSection(
 
     if (entry.kind === 'dynamics') {
       doc.setFont('helvetica', 'italic');
-      doc.setFontSize(8.5);
+      doc.setFontSize(9.5);
       doc.setTextColor(palette.dynamics);
-      doc.text(entry.text, x, cursor + 3, { maxWidth: COLUMN_W });
+      doc.text(entry.text, x, cursor + 3.4, { maxWidth: COLUMN_W });
       cursor += entry.height;
       continue;
     }
@@ -291,18 +291,18 @@ function planSection(
 
   if (section.dynamics) {
     doc.setFont('helvetica', 'italic');
-    doc.setFontSize(8.5);
+    doc.setFontSize(9.5);
     const rows = doc.splitTextToSize(section.dynamics, COLUMN_W).length;
-    plan.push({ kind: 'dynamics', height: rows * 4 + 2, text: section.dynamics });
+    plan.push({ kind: 'dynamics', height: rows * 4.4 + 2, text: section.dynamics });
   }
 
   for (const line of section.lines) {
     plan.push(planLine(doc, line, chordLabel, showChords));
     if (line.dynamics) {
       doc.setFont('helvetica', 'italic');
-      doc.setFontSize(8.5);
+      doc.setFontSize(9.5);
       const rows = doc.splitTextToSize(line.dynamics, COLUMN_W).length;
-      plan.push({ kind: 'dynamics', height: rows * 4 + 2, text: line.dynamics });
+      plan.push({ kind: 'dynamics', height: rows * 4.4 + 2, text: line.dynamics });
     }
   }
 

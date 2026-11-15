@@ -318,8 +318,10 @@ export type Notation = 'anglo' | 'italiano';
 
 export type Settings = {
   notation: Notation;
-  /** Multiplier applied to lyric and chord sizes in the viewer. */
+  /** Multiplier applied to lyric size in the viewer. */
   fontScale: number;
+  /** Multiplier applied to chord size in the viewer. */
+  chordScale: number;
   showChords: boolean;
   /**
    * Write the degree over each chord of the key in the picker — 1, 2m, 4, 5 —
@@ -336,6 +338,7 @@ export type Settings = {
 export const DEFAULT_SETTINGS: Settings = {
   notation: 'anglo',
   fontScale: 1,
+  chordScale: 1,
   showChords: true,
   nashville: false,
   keepAwake: true,

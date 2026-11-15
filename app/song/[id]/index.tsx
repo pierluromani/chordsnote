@@ -271,7 +271,7 @@ export default function Viewer() {
 
               {section.dynamics ? (
                 <View style={styles.dynamics}>
-                  <DynamicsNote text={section.dynamics} />
+                  <DynamicsNote text={section.dynamics} scale={settings.fontScale} />
                 </View>
               ) : null}
 
@@ -284,11 +284,12 @@ export default function Viewer() {
                       semitones={semitones}
                       useFlats={useFlats}
                       fontScale={settings.fontScale}
+                      chordScale={settings.chordScale}
                       showChords={settings.showChords}
                     />
                     {line.dynamics ? (
                       <View style={styles.lineDynamics}>
-                        <DynamicsNote text={line.dynamics} />
+                        <DynamicsNote text={line.dynamics} scale={settings.fontScale} />
                       </View>
                     ) : null}
                   </React.Fragment>
@@ -518,7 +519,7 @@ function OptionsSheet({
         />
         <SheetRow
           icon={<TextSize size={17} color={palette.accent} />}
-          label="Dimensione testo"
+          label="Dimensione testo e accordi"
           last
           onPress={onTextSize}
         />
@@ -530,6 +531,7 @@ function OptionsSheet({
 function TextSizeSheet({ visible, onClose }: { visible: boolean; onClose: () => void }) {
   const settings = useStore((state) => state.settings);
   const setSettings = useStore((state) => state.setSettings);
+  const chordScale = settings.chordScale ?? 1;
 
   return (
     <Sheet visible={visible} onClose={onClose} title="Lettura">
@@ -542,7 +544,11 @@ function TextSizeSheet({ visible, onClose }: { visible: boolean; onClose: () => 
         </View>
 
         <Tap
-          onPress={() => setSettings({ fontScale: Math.max(0.8, settings.fontScale - 0.1) })}
+          onPress={() =>
+            setSettings({
+              fontScale: Math.max(0.7, Math.round((settings.fontScale - 0.1) * 10) / 10),
+            })
+          }
           accessibilityRole="button"
           accessibilityLabel="Riduci il testo"
           style={styles.stepperKey}
@@ -550,9 +556,47 @@ function TextSizeSheet({ visible, onClose }: { visible: boolean; onClose: () => 
           <Minus size={18} color={palette.text} />
         </Tap>
         <Tap
-          onPress={() => setSettings({ fontScale: Math.min(1.8, settings.fontScale + 0.1) })}
+          onPress={() =>
+            setSettings({
+              fontScale: Math.min(1.8, Math.round((settings.fontScale + 0.1) * 10) / 10),
+            })
+          }
           accessibilityRole="button"
           accessibilityLabel="Ingrandisci il testo"
+          style={styles.stepperKey}
+        >
+          <Plus size={18} color={palette.text} />
+        </Tap>
+      </View>
+
+      <View style={styles.transposeCard}>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.transposeTitle}>Dimensione accordi</Text>
+          <Text style={styles.transposeMeta}>
+            {Math.round(chordScale * 100)}% della misura di stampa
+          </Text>
+        </View>
+
+        <Tap
+          onPress={() =>
+            setSettings({
+              chordScale: Math.max(0.7, Math.round((chordScale - 0.1) * 10) / 10),
+            })
+          }
+          accessibilityRole="button"
+          accessibilityLabel="Riduci gli accordi"
+          style={styles.stepperKey}
+        >
+          <Minus size={18} color={palette.text} />
+        </Tap>
+        <Tap
+          onPress={() =>
+            setSettings({
+              chordScale: Math.min(1.8, Math.round((chordScale + 0.1) * 10) / 10),
+            })
+          }
+          accessibilityRole="button"
+          accessibilityLabel="Ingrandisci gli accordi"
           style={styles.stepperKey}
         >
           <Plus size={18} color={palette.text} />

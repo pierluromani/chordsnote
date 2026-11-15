@@ -38,6 +38,7 @@ export type ChordLineProps = {
   semitones: number;
   useFlats: boolean;
   fontScale?: number;
+  chordScale?: number;
   showChords?: boolean;
   variant?: ChordLineVariant;
   editing?: boolean;
@@ -74,6 +75,7 @@ export function ChordLine({
   semitones,
   useFlats,
   fontScale = 1,
+  chordScale,
   showChords = true,
   variant = 'viewer',
   editing = false,
@@ -83,11 +85,12 @@ export function ChordLine({
   onDragRank,
   activeChordId,
 }: ChordLineProps) {
+  const effectiveChordScale = chordScale ?? fontScale;
   const metrics = METRICS[variant];
   const lyricSize = metrics.lyric * fontScale;
   const lyricLine = metrics.lyricLine * fontScale;
-  const chordSize = metrics.chord * fontScale;
-  const boxHeight = metrics.box * fontScale;
+  const chordSize = metrics.chord * effectiveChordScale;
+  const boxHeight = metrics.box * effectiveChordScale;
 
   const chordAt = useMemo(() => {
     const map = new Map<number, ChordAnchor>();
@@ -128,7 +131,7 @@ export function ChordLine({
       <InstrumentalLine
         line={line}
         label={label}
-        size={(variant === 'viewer' ? 19 : 14) * fontScale}
+        size={(variant === 'viewer' ? 19 : 14) * effectiveChordScale}
         editing={editing}
         showChords={showChords}
         onPressChord={onPressChord}
@@ -216,7 +219,10 @@ export function ChordLine({
             ]}
           >
             <Text
-              style={[styles.chord, { fontSize: chordSize, lineHeight: metrics.chordLine * fontScale }]}
+              style={[
+                styles.chord,
+                { fontSize: chordSize, lineHeight: metrics.chordLine * effectiveChordScale },
+              ]}
             >
               {label(chord)}
             </Text>

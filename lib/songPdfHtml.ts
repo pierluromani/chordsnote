@@ -166,7 +166,7 @@ const STYLES = `
   }
   .dynamics {
     font-style: italic;
-    font-size: 8.5pt;
+    font-size: 9.5pt;
     color: ${palette.dynamics};
     margin: 0 0 2mm;
   }

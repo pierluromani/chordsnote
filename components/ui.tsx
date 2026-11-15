@@ -377,8 +377,17 @@ export function DataField({
  * A dynamics note — the only amber on the screen, and the only italic. It reads
  * as an instruction from the arranger rather than as part of the song.
  */
-export function DynamicsNote({ text }: { text: string }) {
-  return <Text style={styles.dynamics}>{text}</Text>;
+export function DynamicsNote({ text, scale = 1 }: { text: string; scale?: number }) {
+  return (
+    <Text
+      style={[
+        styles.dynamics,
+        scale !== 1 && { fontSize: 13.5 * scale, lineHeight: 19 * scale },
+      ]}
+    >
+      {text}
+    </Text>
+  );
 }
 
 /**
@@ -744,8 +753,8 @@ export const styles = StyleSheet.create({
   },
   dynamics: {
     fontFamily: font.metaItalic,
-    fontSize: 11.5,
-    lineHeight: 16,
+    fontSize: 13.5,
+    lineHeight: 19,
     color: palette.dynamicsDim,
   },
   avatar: {

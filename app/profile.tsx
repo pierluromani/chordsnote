@@ -278,7 +278,11 @@ export default function ProfileScreen() {
               </Text>
             </View>
             <Tap
-              onPress={() => setSettings({ fontScale: Math.max(0.8, settings.fontScale - 0.1) })}
+              onPress={() =>
+                setSettings({
+                  fontScale: Math.max(0.7, Math.round((settings.fontScale - 0.1) * 10) / 10),
+                })
+              }
               accessibilityRole="button"
               accessibilityLabel="Riduci il testo"
               style={styles.stepperKey}
@@ -286,9 +290,52 @@ export default function ProfileScreen() {
               <Minus size={17} color={palette.text} />
             </Tap>
             <Tap
-              onPress={() => setSettings({ fontScale: Math.min(1.8, settings.fontScale + 0.1) })}
+              onPress={() =>
+                setSettings({
+                  fontScale: Math.min(1.8, Math.round((settings.fontScale + 0.1) * 10) / 10),
+                })
+              }
               accessibilityRole="button"
               accessibilityLabel="Ingrandisci il testo"
+              style={styles.stepperKey}
+            >
+              <Plus size={17} color={palette.text} />
+            </Tap>
+          </View>
+
+          <View style={styles.settingRow}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.settingLabel}>Dimensione degli accordi</Text>
+              <Text style={styles.settingHint}>
+                {Math.round((settings.chordScale ?? 1) * 100)}% della misura di stampa
+              </Text>
+            </View>
+            <Tap
+              onPress={() =>
+                setSettings({
+                  chordScale: Math.max(
+                    0.7,
+                    Math.round(((settings.chordScale ?? 1) - 0.1) * 10) / 10
+                  ),
+                })
+              }
+              accessibilityRole="button"
+              accessibilityLabel="Riduci gli accordi"
+              style={styles.stepperKey}
+            >
+              <Minus size={17} color={palette.text} />
+            </Tap>
+            <Tap
+              onPress={() =>
+                setSettings({
+                  chordScale: Math.min(
+                    1.8,
+                    Math.round(((settings.chordScale ?? 1) + 0.1) * 10) / 10
+                  ),
+                })
+              }
+              accessibilityRole="button"
+              accessibilityLabel="Ingrandisci gli accordi"
               style={styles.stepperKey}
             >
               <Plus size={17} color={palette.text} />

@@ -1130,16 +1130,16 @@ const styles = StyleSheet.create({
   dynamicsInput: {
     flex: 1,
     fontFamily: font.metaItalic,
-    fontSize: 12,
-    lineHeight: 18,
+    fontSize: 13.5,
+    lineHeight: 20,
     color: palette.dynamics,
     padding: 0,
   },
   dynamicsText: {
     flex: 1,
     fontFamily: font.metaItalic,
-    fontSize: 12,
-    lineHeight: 18,
+    fontSize: 13.5,
+    lineHeight: 20,
     color: palette.dynamics,
   },
   dynamicsLineBlock: {
